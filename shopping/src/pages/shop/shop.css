@@ -1,0 +1,32 @@
+.shop-container {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .product-item {
+    border: 1px solid #ddd;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .product-thumbnail img {
+    max-width: 100%;
+    align-items: center;
+    height: auto;
+  }
+  
+  .product-details {
+    margin-top: 10px;
+  }
+  
+  .product-details h3 {
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  .product-details p {
+    margin: 5px 0;
+    font-size: 16px;
+  }
+  
