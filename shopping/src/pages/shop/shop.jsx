@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { PRODUCTS } from "../../products";
+import { ShopContext } from "../../context/shop-context";
 import { Product } from "./Product";
 import "./shop.css";
 
@@ -9,21 +10,36 @@ export const Shop = () => {
   const [filteredProducts, setFilteredProducts] = useState(initialProducts);
   const [sortBy, setSortBy] = useState(null);
   const [showOptions, setShowOptions] = useState(false);
+  const {searchQuery}=useContext(ShopContext)
 
   useEffect(() => {
-    // Set filteredProducts to initialProducts when component mounts
     setFilteredProducts(initialProducts);
   }, [initialProducts]);
+  
+  useEffect(() => {
+    if (searchQuery) {
+      fetch(`https://dummyjson.com/products/search?q=${searchQuery}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setFilteredProducts(data.products);
+        })
+        .catch((error) => {
+          console.error("Error fetching products:", error);
+        });
+    } else {
+      setFilteredProducts([initialProducts]);
+    }
+  }, [searchQuery]);
 
+  
   const handleToggleOptions = () => {
     setShowOptions(!showOptions);
   };
 
   const handleSortBy = (option) => {
     setSortBy(option);
-    setShowOptions(false); // Close the dropdown after selecting an option
-
-    let sortedProducts = [...filteredProducts]; // Create a copy of the filtered products array
+    setShowOptions(false); 
+    let sortedProducts = [...filteredProducts]; 
 
     if (option === 'ascending') {
       sortedProducts.sort((a, b) => a.price - b.price);
@@ -31,12 +47,13 @@ export const Shop = () => {
       sortedProducts.sort((a, b) => b.price - a.price);
     }
 
-    setFilteredProducts(sortedProducts); // Update the filtered products state
+    setFilteredProducts(sortedProducts);
   };
 
   const handleClear = () => {
-    setSortBy(null); // Reset sorting option
-    setFilteredProducts(initialProducts); // Reset filtered products to initial state
+    setSortBy(null); 
+    setShowOptions(false);
+    setFilteredProducts(initialProducts);
   };
 
   return (
@@ -66,4 +83,5 @@ export const Shop = () => {
       </div>
     </div>
   );
+  
 };

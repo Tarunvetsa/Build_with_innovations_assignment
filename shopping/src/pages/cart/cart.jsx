@@ -14,14 +14,14 @@ const Cart = () => {
 
   return (
     <div className="cart">
-      <div>
-        <h1>Your Cart Items</h1>
-      </div>
+  
       <div className="cart">
       
         {products.map((product) => {
           if (cartItems[product.id] > 0) {
             return <CartItem key={product.id} data={product} />;
+          }else{
+            return null;
           }
         })}
       </div>

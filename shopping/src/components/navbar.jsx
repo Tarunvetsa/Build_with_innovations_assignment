@@ -1,16 +1,14 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCart } from "phosphor-react";
 import "./navbar.css";
+import { ShopContext } from "../context/shop-context";
+import { Shop } from "../pages/shop/shop";
 
 export const Navbar = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const handleSearch = (event) => {
-    console.log("Searching for:", searchQuery);
-  };
-
+  const {searchQuery, handlequery} = useContext(ShopContext);
+  
   return (
     <div className="navbar">
       <div className="searchBar">
@@ -19,8 +17,8 @@ export const Navbar = () => {
           className="searchInput"
           placeholder="Search..."
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          onKeyUp={handleSearch}
+          onChange={(e) => handlequery(e.target.value)}
+          
         />
       </div>
       <div className="links">

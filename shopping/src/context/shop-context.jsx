@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { createContext, useState } from "react";
 import PropTypes from 'prop-types';
 import { PRODUCTS } from "../products";
@@ -5,7 +6,8 @@ import { PRODUCTS } from "../products";
 export const ShopContext = createContext(null);
 
 export const ShopContextProvider = ( props ) => {
-  const products = PRODUCTS();
+const x = PRODUCTS()
+  const [products,setProducts ]= useState(x);
   const getDefaultCart = () => {
     let cart = {};
     for (let i = 0; i < products.length; i++) {
@@ -13,14 +15,15 @@ export const ShopContextProvider = ( props ) => {
     }
     return cart;
   };
-  
   const [cartItems, setCartItems] = useState(getDefaultCart());
+  const [displayItems, setDisplayItems] = useState(x);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const getTotalCartAmount = () => {
     let totalAmount = 0;
     for (const item in cartItems) {
       if (cartItems[item] > 0) {
-        let itemInfo = products.find((product) => product.id === Number(item));
+        let itemInfo = x.find((product) => product.id === Number.parseInt(item));
         totalAmount += cartItems[item] * itemInfo.price;
       }
     }
@@ -36,6 +39,10 @@ export const ShopContextProvider = ( props ) => {
     }
     return prev;
     });
+  };
+  
+  const handlequery = (q) => {
+    setSearchQuery(q);
   };
 
   const removeFromCart = (itemId) => {
@@ -58,7 +65,11 @@ export const ShopContextProvider = ( props ) => {
     removeFromCart,
     getTotalCartAmount,
     checkout,
+    
+    searchQuery,
+    handlequery
   };
+
 
   return (
     <ShopContext.Provider value={contextValue}>
