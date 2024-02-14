@@ -1,0 +1,29 @@
+/* Product.css */
+
+/* Styles for the product container */
+.product {
+    position: relative;
+    display: inline-block; /* Make sure the container doesn't expand to full width */
+  }
+  
+  /* Styles for the overlay */
+  .overlay {
+    position: fixed; /* Fixed position to cover the entire viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    z-index: 1000; /* Ensure the overlay appears on top of other elements */
+  }
+  
+  /* Styles for the image inside the overlay */
+  .overlay img {
+    max-width: 80%; /* Adjust the image size as needed */
+    max-height: 80vh; /* Adjust the image size as needed, limiting the height */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a subtle shadow to the image */
+  }
+  
