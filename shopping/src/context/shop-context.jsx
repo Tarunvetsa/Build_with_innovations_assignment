@@ -5,9 +5,9 @@ import { PRODUCTS } from "../products";
 
 export const ShopContext = createContext(null);
 
-export const ShopContextProvider = ( props ) => {
-const x = PRODUCTS()
-  const [products,setProducts ]= useState(x);
+export const ShopContextProvider = (props) => {
+
+  const [products, setProducts] = useState([]);
   const getDefaultCart = () => {
     let cart = {};
     for (let i = 0; i < products.length; i++) {
@@ -15,15 +15,16 @@ const x = PRODUCTS()
     }
     return cart;
   };
+  const [loginuser, setLoginuser] = useState("");
   const [cartItems, setCartItems] = useState(getDefaultCart());
-  const [displayItems, setDisplayItems] = useState(x);
+  const [displayItems, setDisplayItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const getTotalCartAmount = () => {
+  const getTotalCartAmount = async () => {
     let totalAmount = 0;
     for (const item in cartItems) {
       if (cartItems[item] > 0) {
-        let itemInfo = x.find((product) => product.id === Number.parseInt(item));
+        let itemInfo = products.find((product) => Number.parseInt(product.id) === Number.parseInt(item));
         totalAmount += cartItems[item] * itemInfo.price;
       }
     }
@@ -32,17 +33,20 @@ const x = PRODUCTS()
 
   const addToCart = (itemId) => {
     setCartItems((prev) => {
-    if(Object.keys(prev).map(v => Number.parseInt(v)).includes(itemId)){
-      prev[itemId] = prev[itemId]+1;
-    }else{
-      prev[itemId]= 1;  
-    }
-    return prev;
+      if (itemId in prev) {
+        return { ...prev, [itemId]: prev[itemId] + 1 };
+      } else {
+        return { ...prev, [itemId]: 1 };
+      }
     });
   };
-  
+
   const handlequery = (q) => {
     setSearchQuery(q);
+  };
+
+  const fixlogin = (val) => {
+    setLoginuser(val);
   };
 
   const removeFromCart = (itemId) => {
@@ -65,9 +69,11 @@ const x = PRODUCTS()
     removeFromCart,
     getTotalCartAmount,
     checkout,
-    
+    setProducts,
     searchQuery,
-    handlequery
+    handlequery,
+    loginuser,
+    fixlogin,
   };
 
 

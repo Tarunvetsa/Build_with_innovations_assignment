@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState , useContext} from 'react';
+import { ShopContext } from '../../context/shop-context';
 import './Login.css'; 
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const { fixlogin} = useContext(ShopContext)
 
   const handleLogin = async () => {
     try {
@@ -23,7 +25,8 @@ function Login() {
 
       const data = await response.json();
       const token = data.token;
-      sessionStorage.setItem(data.username, token);
+      fixlogin(data.username)
+      sessionStorage.setItem('token', token);
 
       window.location.href = '/shop';
     } catch (error) {
