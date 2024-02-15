@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Shop } from './pages/shop/shop.jsx';
 import Cart from './pages/cart/cart.jsx';
 import Login from './pages/Login/Login.jsx'
@@ -10,17 +10,32 @@ function App() {
   return (
     <div className="App">
       <ShopContextProvider>
-      <Router>
-        <Navbar />
+        <Router>
           <Routes>
-            <Route path="/" element={<Login />}/>
-            <Route path="/shop" element={<Shop />}/>
-            <Route path="/cart" element={<Cart />}/>
+            <Route path="/" element={<Login />} />
+            <Route
+              path="/shop/*"
+              element={
+                <>
+                  <Navbar />
+                  <Shop />
+                </>
+              }
+            />
+            <Route
+              path="/cart/*"
+              element={
+                <>
+                  <Navbar />
+                  <Cart />
+                </>
+              }
+            />
           </Routes>
-      </Router>
+        </Router>
       </ShopContextProvider>
     </div>
   )
 }
 
-export default App
+export default App;

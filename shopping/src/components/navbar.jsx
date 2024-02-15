@@ -1,14 +1,18 @@
-/* eslint-disable no-unused-vars */
-import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { ShoppingCart } from "phosphor-react";
 import "./navbar.css";
 import { ShopContext } from "../context/shop-context";
-import { Shop } from "../pages/shop/shop";
 
 export const Navbar = () => {
-  const {searchQuery, handlequery} = useContext(ShopContext);
-  
+  const { searchQuery, handlequery } = useContext(ShopContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    sessionStorage.clear();
+    navigate("/");
+  };
+
   return (
     <div className="navbar">
       <div className="searchBar">
@@ -18,7 +22,6 @@ export const Navbar = () => {
           placeholder="Search..."
           value={searchQuery}
           onChange={(e) => handlequery(e.target.value)}
-          
         />
       </div>
       <div className="links">
@@ -26,8 +29,8 @@ export const Navbar = () => {
         <Link to="/cart">
           <ShoppingCart size={32} />
         </Link>
+        <Link to="/" onClick={handleLogout}>Logout</Link>
       </div>
-
     </div>
   );
 };

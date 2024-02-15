@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useContext, useState } from "react";
-import PropTypes from "prop-types"; 
+import PropTypes from "prop-types";
 import { ShopContext } from "../../context/shop-context";
 
 export const Product = ({ data }) => {
@@ -13,11 +13,11 @@ export const Product = ({ data }) => {
     }).isRequired
   };
 
-  const { id, title, price, thumbnail } = data; 
+  const { id, title, price, thumbnail } = data;
   const { cartItems, addToCart } = useContext(ShopContext);
-  const [u,setU] =useState(true)
+  const [u, setU] = useState(true)
 
-//   const cartItemCount = cartItems[id];
+  //   const cartItemCount = cartItems[id];
   return (
     <div className="product">
       <img src={thumbnail} alt={title} />
@@ -27,8 +27,8 @@ export const Product = ({ data }) => {
         </p>
         <p>${price}</p>
       </div>
-      <button className="addToCartBttn" onClick={() => {addToCart(id);setU(v => !v)}}>
-        Add To Cart {cartItems[id]}
+      <button className="addToCartBttn" onClick={() => { addToCart(id); setU(v => !v) }}>
+        Add To Cart {(cartItems[id] > 0 && `(${cartItems[id]})`)}
       </button>
     </div>
   );
