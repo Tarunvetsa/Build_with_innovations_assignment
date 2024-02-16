@@ -7,7 +7,7 @@ import { Navigate } from "react-router-dom";
 import "./shop.css";
 import { Password } from "phosphor-react";
 
-const Shop = () => {
+function Shop() {
   const [initialProducts, setInitialProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [success, setSuccess] = useState(false);
