@@ -17,7 +17,7 @@ function App() {
               path="/shop"
               element={
                 <>
-                  <Navbar />
+                  {/* <Navbar /> */}
                   {/* <Shop /> */}
                 </>
               }
