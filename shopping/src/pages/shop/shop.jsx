@@ -7,7 +7,7 @@ import { Navigate } from "react-router-dom";
 import "./shop.css";
 import { Password } from "phosphor-react";
 
-const Shop = () => {
+export const Shop = () => {
   const [initialProducts, setInitialProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [success, setSuccess] = useState(false);
@@ -134,4 +134,4 @@ const Shop = () => {
     </div>
   );
 };
-export default Shop;
+
