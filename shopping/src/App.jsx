@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Shop  from './pages/shop/Shop.jsx';
+// import Shop from './pages/shop/Shop.jsx';
 import Cart from './pages/cart/cart.jsx';
 import Login from './pages/Login/Login.jsx'
 import { Navbar } from "./components/navbar";
@@ -18,7 +18,7 @@ function App() {
               element={
                 <>
                   <Navbar />
-                  <Shop />
+                  {/* <Shop /> */}
                 </>
               }
             />
